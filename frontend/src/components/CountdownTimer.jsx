@@ -11,15 +11,19 @@ export const CountdownTimer = ({ targetDate }) => {
 
   useEffect(() => {
     const calculateTimeLeft = () => {
-      const difference = new Date(targetDate) - new Date();
+      const target = new Date(targetDate).getTime();
+      const now = new Date().getTime();
+      const difference = target - now;
       
       if (difference > 0) {
         setTimeLeft({
           days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-          hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-          minutes: Math.floor((difference / 1000 / 60) % 60),
-          seconds: Math.floor((difference / 1000) % 60)
+          hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+          minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
+          seconds: Math.floor((difference % (1000 * 60)) / 1000)
         });
+      } else {
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
       }
     };
 
@@ -41,7 +45,7 @@ export const CountdownTimer = ({ targetDate }) => {
       <div className="flex justify-center gap-3 md:gap-6">
         <div className="countdown-item flex flex-col items-center bg-white/10 backdrop-blur-sm rounded-2xl p-3 md:p-4 min-w-[70px] md:min-w-[90px]">
           <span className="text-3xl md:text-5xl font-serif font-bold text-white">
-            {timeLeft.days}
+            {String(timeLeft.days).padStart(2, '0')}
           </span>
           <span className="text-xs md:text-sm text-amber-100 mt-1 uppercase tracking-wide">
             Días
@@ -50,7 +54,7 @@ export const CountdownTimer = ({ targetDate }) => {
         
         <div className="countdown-item flex flex-col items-center bg-white/10 backdrop-blur-sm rounded-2xl p-3 md:p-4 min-w-[70px] md:min-w-[90px]">
           <span className="text-3xl md:text-5xl font-serif font-bold text-white">
-            {timeLeft.hours}
+            {String(timeLeft.hours).padStart(2, '0')}
           </span>
           <span className="text-xs md:text-sm text-amber-100 mt-1 uppercase tracking-wide">
             Horas
@@ -59,7 +63,7 @@ export const CountdownTimer = ({ targetDate }) => {
         
         <div className="countdown-item flex flex-col items-center bg-white/10 backdrop-blur-sm rounded-2xl p-3 md:p-4 min-w-[70px] md:min-w-[90px]">
           <span className="text-3xl md:text-5xl font-serif font-bold text-white">
-            {timeLeft.minutes}
+            {String(timeLeft.minutes).padStart(2, '0')}
           </span>
           <span className="text-xs md:text-sm text-amber-100 mt-1 uppercase tracking-wide">
             Min
@@ -68,7 +72,7 @@ export const CountdownTimer = ({ targetDate }) => {
         
         <div className="countdown-item flex flex-col items-center bg-white/10 backdrop-blur-sm rounded-2xl p-3 md:p-4 min-w-[70px] md:min-w-[90px]">
           <span className="text-3xl md:text-5xl font-serif font-bold text-white">
-            {timeLeft.seconds}
+            {String(timeLeft.seconds).padStart(2, '0')}
           </span>
           <span className="text-xs md:text-sm text-amber-100 mt-1 uppercase tracking-wide">
             Seg
