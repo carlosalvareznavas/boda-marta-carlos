@@ -50,10 +50,34 @@ export const weddingData = {
 
 // Mock función para simular envío de formulario
 export const submitRSVP = async (formData) => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      console.log('RSVP Data (Mock):', formData);
-      resolve({ success: true, message: 'Confirmación enviada correctamente' });
-    }, 1000);
-  });
+  const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+  const API = `${BACKEND_URL}/api`;
+  
+  try {
+    const response = await fetch(`${API}/rsvp`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        attending: formData.attending,
+        number_of_guests: formData.numberOfGuests,
+        guests: formData.guests,
+        phone: formData.phone,
+        email: formData.email || null,
+        comments: formData.comments || null
+      })
+    });
+    
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.detail || 'Error al enviar confirmación');
+    }
+    
+    const data = await response.json();
+    return { success: true, data, message: 'Confirmación enviada correctamente' };
+  } catch (error) {
+    console.error('Error submitting RSVP:', error);
+    throw error;
+  }
 };
