@@ -2,6 +2,8 @@ import React from 'react';
 import { Calendar, MapPin } from 'lucide-react';
 import { Button } from './ui/button';
 import { weddingData } from '../data/mockData';
+import { CountdownTimer } from './CountdownTimer';
+import { AddToCalendar } from './AddToCalendar';
 
 export const Hero = () => {
   const scrollToSection = (id) => {
@@ -69,13 +71,20 @@ export const Hero = () => {
         </div>
 
         {/* Message */}
-        <div className="mb-10 max-w-xl mx-auto">
+        <div className="mb-6 max-w-xl mx-auto">
           <p className="text-white text-base md:text-lg leading-relaxed font-light">
             Nos hace muchísima ilusión compartir este día con vosotros. Venid con ganas de celebrar, de reír… y de vivir una noche muy nuestra.
           </p>
         </div>
 
+        {/* Countdown Timer */}
+        <CountdownTimer targetDate="2025-06-27T19:30:00" />
+
+        {/* Add to Calendar */}
+        <AddToCalendar />
+
         {/* CTA Buttons */}
+        <div className="mt-8"></div>
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <Button 
             onClick={() => scrollToSection('rsvp')}
