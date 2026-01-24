@@ -1,15 +1,12 @@
 from fastapi import APIRouter, HTTPException, status
 from models.rsvp import RSVP, RSVPCreate
 from services.google_sheets import google_sheets_service
+from database import db
 import logging
 
 logger = logging.getLogger(__name__)
 
 router = APIRouter()
-
-# Get database from server.py through dependency injection
-# We'll access db through the router's state
-from server import db
 
 @router.post("/rsvp", response_model=RSVP, status_code=status.HTTP_201_CREATED)
 async def create_rsvp(rsvp_input: RSVPCreate):
