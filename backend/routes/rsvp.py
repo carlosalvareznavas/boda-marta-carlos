@@ -1,18 +1,15 @@
 from fastapi import APIRouter, HTTPException, status
 from models.rsvp import RSVP, RSVPCreate
-from motor.motor_asyncio import AsyncIOMotorClient
 from services.google_sheets import google_sheets_service
-import os
 import logging
 
 logger = logging.getLogger(__name__)
 
 router = APIRouter()
 
-# MongoDB connection
-mongo_url = os.environ['MONGO_URL']
-client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ['DB_NAME']]
+# Get database from server.py through dependency injection
+# We'll access db through the router's state
+from server import db
 
 @router.post("/rsvp", response_model=RSVP, status_code=status.HTTP_201_CREATED)
 async def create_rsvp(rsvp_input: RSVPCreate):
