@@ -32,13 +32,16 @@ Crear una landing page one-page móvil-first que funcione como invitación digit
 
 ## ✅ Implementado (24 Enero 2025)
 
-### Frontend (Mock Data)
+### Frontend (Actualizado - Backend Integrado)
 - ✅ Hero section con imagen de la Alhambra
+- ✅ **NUEVO: Contador en tiempo real hasta la fecha de la boda**
+- ✅ **NUEVO: Botones "Añadir a calendario" (Google Calendar + descarga .ics)**
 - ✅ Elementos decorativos (granada y cactus acuarela)
 - ✅ Sección emocional "Un día para celebrar en serio"
 - ✅ Sección "Todo en el mismo sitio"
 - ✅ Sección ubicación con imágenes y mapa
 - ✅ Formulario RSVP completo con lógica dinámica de asistentes (1-6)
+  - ✅ **NUEVO: Campo categoría (Adulto/Adolescente/Niño) obligatorio por asistente**
 - ✅ Sección "Cómo llegar"
 - ✅ Sección contacto con WhatsApp
 - ✅ Footer con aviso de privacidad
@@ -48,25 +51,56 @@ Crear una landing page one-page móvil-first que funcione como invitación digit
 - ✅ Tipografía serif elegante (Cormorant Garamond)
 - ✅ Animaciones sutiles en hover y scroll
 - ✅ Toast notifications con Sonner
+- ✅ **NUEVO: Integrado con backend real (no mock)**
+
+### Backend (Completado)
+- ✅ API REST con FastAPI
+- ✅ Modelo MongoDB para RSVP con campos:
+  - attending, number_of_guests, guests[], phone, email, comments, submitted_at
+  - Guest model: name, age_category, allergies
+- ✅ Endpoint POST `/api/rsvp` - Crear confirmación
+- ✅ Endpoint GET `/api/rsvp/stats` - Estadísticas (total, asistentes, categorías)
+- ✅ Endpoint GET `/api/rsvp/list` - Listar todas las confirmaciones
+- ✅ Endpoint GET `/api/health` - Health check
+- ✅ Validación de datos con Pydantic
+- ✅ Logging configurado
+- ✅ **Integración Google Sheets preparada (pendiente credenciales)**
+
+### Integración Google Sheets (Preparada)
+- ✅ Código implementado para escritura automática
+- ✅ Service configurado con columnas:
+  - Fecha y Hora, Asiste, Nº Asistentes, Nombres, Categorías, Alergias, Teléfono, Email, Comentarios, ID
+- ⏳ **PENDIENTE: Configurar credenciales (ver GOOGLE_SHEETS_SETUP.md)**
 
 ### Componentes Creados
-- `/app/frontend/src/components/Hero.jsx`
+**Frontend:**
+- `/app/frontend/src/components/Hero.jsx` (actualizado con countdown y calendario)
+- `/app/frontend/src/components/CountdownTimer.jsx` (nuevo)
+- `/app/frontend/src/components/AddToCalendar.jsx` (nuevo)
 - `/app/frontend/src/components/EmotionalSection.jsx`
 - `/app/frontend/src/components/CelebrationSection.jsx`
 - `/app/frontend/src/components/LocationSection.jsx`
-- `/app/frontend/src/components/RSVPSection.jsx`
+- `/app/frontend/src/components/RSVPSection.jsx` (actualizado con campo edad)
 - `/app/frontend/src/components/HowToGetSection.jsx`
 - `/app/frontend/src/components/ContactSection.jsx`
 - `/app/frontend/src/components/Footer.jsx`
-- `/app/frontend/src/data/mockData.js`
+- `/app/frontend/src/data/mockData.js` (actualizado con backend real)
+
+**Backend:**
+- `/app/backend/server.py`
+- `/app/backend/database.py`
+- `/app/backend/models/rsvp.py`
+- `/app/backend/routes/rsvp.py`
+- `/app/backend/services/google_sheets.py`
 
 ### Datos de Contacto Configurados
 - WhatsApp: 634585750 / 637213571
 - Emails notificación: carlosalvareznavas@gmail.com, martarrz.mr@gmail.com
+- Google Sheet ID: 1-E7eEKuFLivTEPPo8gHOM1e5385py0YQQGM39suqS_M
 
 ---
 
-## 📊 Funcionalidad RSVP (Mock)
+## 📊 Funcionalidad RSVP (Completado - Backend Real)
 
 ### Campos del Formulario
 1. **¿Vas a venir?** (obligatorio)
@@ -77,6 +111,7 @@ Crear una landing page one-page móvil-first que funcione como invitación digit
    - Número de asistentes (1-6)
    - Por cada asistente:
      - Nombre y apellidos (obligatorio)
+     - **Categoría (obligatorio): Adulto / Adolescente / Niño**
      - Alergias/intolerancias (opcional)
 
 3. **Información de contacto:**
@@ -89,10 +124,12 @@ Crear una landing page one-page móvil-first que funcione como invitación digit
 
 ### Lógica Implementada
 - Campos dinámicos según número de asistentes
-- Validación de campos obligatorios
+- Validación de campos obligatorios (incluyendo categoría de edad)
 - Mensajes diferenciados según respuesta (Sí/No)
 - Opción de modificar respuesta
-- Mock de envío a backend (consola)
+- **Envío real a backend FastAPI**
+- **Guardado en MongoDB**
+- **Preparado para Google Sheets (pendiente credenciales)**
 
 ---
 
@@ -135,44 +172,30 @@ Crear una landing page one-page móvil-first que funcione como invitación digit
 
 ## 🔄 Próximos Pasos (Backlog Priorizado)
 
-### P0 - Backend & Integración (Siguiente fase)
-1. **Backend API (FastAPI)**
-   - Modelo MongoDB para RSVP
-   - Endpoint POST `/api/rsvp` para recibir confirmaciones
-   - Validación de datos
-   - Estructura de datos por invitado y lista de asistentes
-
-2. **Integración Google Sheets**
-   - Configurar Google Sheets API
-   - Crear hoja de cálculo compartida
-   - Endpoint para escribir confirmaciones en tiempo real
-   - Columnas: Timestamp, Asiste, Nº Asistentes, Nombres, Alergias, Teléfono, Email, Comentarios
-
-3. **Notificaciones Email**
-   - Configurar servicio de email (SendGrid/SMTP)
-   - Template de notificación
-   - Envío automático a carlosalvareznavas@gmail.com y martarrz.mr@gmail.com
-   - Incluir detalles de la confirmación
-
-4. **Integración Frontend-Backend**
-   - Conectar formulario con endpoint POST `/api/rsvp`
-   - Eliminar mock data de submitRSVP
-   - Manejo de errores y estados de carga
-   - Confirmación exitosa con datos reales
+### P0 - Google Sheets Integration (En progreso)
+1. **Configurar credenciales de Google Cloud** ⏳
+   - Crear Service Account en Google Cloud Console
+   - Descargar archivo JSON de credenciales
+   - Compartir Google Sheet con el email de la service account
+   - Ver instrucciones detalladas en: `/app/GOOGLE_SHEETS_SETUP.md`
+   
+2. **Una vez configurado, las confirmaciones se guardarán automáticamente en:**
+   - MongoDB (funcionando ✅)
+   - Google Sheets (listo, solo falta credenciales ⏳)
 
 ### P1 - Mejoras & Features
-- Panel admin para ver confirmaciones (opcional)
-- Exportar lista de asistentes a CSV
-- Contador de días hasta la boda
-- Galería de fotos del lugar (si se obtienen más imágenes)
-- Música de fondo opcional (desactivada por defecto)
+- Panel admin para ver confirmaciones con gráficas
+- Exportar lista de asistentes a CSV desde MongoDB
+- Optimizar imágenes (lazy loading)
+- SEO meta tags y Open Graph
+- Analytics (Google Analytics opcional)
 
-### P2 - Optimizaciones
-- Lazy loading de imágenes
-- Optimización de performance (Lighthouse)
-- Analytics (Google Analytics)
-- SEO meta tags
-- Open Graph para compartir
+### P2 - Opciones Adicionales
+- Sistema de autenticación para panel admin
+- Envío de recordatorio por WhatsApp días antes
+- Galería de fotos del lugar
+- Música de fondo opcional
+- Modo oscuro
 
 ---
 
