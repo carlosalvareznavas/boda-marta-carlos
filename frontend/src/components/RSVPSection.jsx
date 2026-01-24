@@ -7,13 +7,13 @@ import { Label } from './ui/label';
 import { RadioGroup, RadioGroupItem } from './ui/radio-group';
 import { Checkbox } from './ui/checkbox';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './ui/select';
-import { submitRSVP } from '../data/mockData';
+import { submitRSVP, ageCategories } from '../data/mockData';
 import { toast } from 'sonner';
 
 export const RSVPSection = () => {
   const [attending, setAttending] = useState('');
   const [numberOfGuests, setNumberOfGuests] = useState(1);
-  const [guests, setGuests] = useState([{ name: '', allergies: '' }]);
+  const [guests, setGuests] = useState([{ name: '', ageCategory: '', allergies: '' }]);
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [comments, setComments] = useState('');
@@ -25,7 +25,7 @@ export const RSVPSection = () => {
     setAttending(value);
     if (value === 'no') {
       setNumberOfGuests(1);
-      setGuests([{ name: '', allergies: '' }]);
+      setGuests([{ name: '', ageCategory: '', allergies: '' }]);
     }
   };
 
@@ -35,7 +35,7 @@ export const RSVPSection = () => {
     
     const newGuests = [];
     for (let i = 0; i < num; i++) {
-      newGuests.push(guests[i] || { name: '', allergies: '' });
+      newGuests.push(guests[i] || { name: '', ageCategory: '', allergies: '' });
     }
     setGuests(newGuests);
   };
@@ -69,6 +69,12 @@ export const RSVPSection = () => {
       const hasEmptyNames = guests.some(guest => !guest.name.trim());
       if (hasEmptyNames) {
         toast.error('Por favor, completa los nombres de todos los asistentes');
+        return;
+      }
+      
+      const hasEmptyAgeCategory = guests.some(guest => !guest.ageCategory);
+      if (hasEmptyAgeCategory) {
+        toast.error('Por favor, indica si cada asistente es adulto, adolescente o niño/a');
         return;
       }
     }
@@ -208,6 +214,29 @@ export const RSVPSection = () => {
                         className="mt-2 bg-white border-2 border-olive/20 focus:border-terracota rounded-xl py-6 text-lg"
                         required
                       />
+                    </div>
+                    <div>
+                      <Label htmlFor={`guest-age-${index}`} className="text-olive">
+                        Categoría <span className="text-terracota">*</span>
+                      </Label>
+                      <Select 
+                        value={guest.ageCategory} 
+                        onValueChange={(value) => handleGuestChange(index, 'ageCategory', value)}
+                      >
+                        <SelectTrigger 
+                          id={`guest-age-${index}`}
+                          className="mt-2 w-full bg-white border-2 border-olive/20 focus:border-terracota rounded-xl py-6 text-lg"
+                        >
+                          <SelectValue placeholder="Selecciona categoría" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {ageCategories.map(category => (
+                            <SelectItem key={category.value} value={category.value}>
+                              {category.label}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
                     </div>
                     <div>
                       <Label htmlFor={`guest-allergies-${index}`} className="text-olive">

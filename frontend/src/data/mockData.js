@@ -9,6 +9,13 @@ export const mockRSVPData = {
   privacyAccepted: false
 };
 
+// Opciones de categoría de edad
+export const ageCategories = [
+  { value: 'adulto', label: 'Adulto' },
+  { value: 'adolescente', label: 'Adolescente' },
+  { value: 'nino', label: 'Niño/a' }
+];
+
 // Datos de la boda
 export const weddingData = {
   couple: {
