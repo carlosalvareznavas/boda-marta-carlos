@@ -3,18 +3,18 @@ import { Car, Bus } from 'lucide-react';
 
 export const HowToGetThereNew = () => {
   return (
-    <section className="py-20 px-6 bg-gray-lightest">
-      <div className="max-w-4xl mx-auto">
-        {/* Background image */}
-        <div className="relative mb-12 rounded-lg overflow-hidden">
-          <img 
-            src="/assets/Imagen-como-llegar.jpg"
-            alt="Granada"
-            className="w-full h-64 md:h-80 object-cover grayscale opacity-60"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-lightest"></div>
-        </div>
+    <section className="py-20 px-6 relative overflow-hidden">
+      {/* Background image - Bloque-como-llegar.jpg */}
+      <div className="absolute inset-0 z-0">
+        <img 
+          src="/assets/Bloque-como-llegar.jpg"
+          alt=""
+          className="w-full h-full object-cover grayscale opacity-25"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-gray-lightest via-gray-lightest/90 to-gray-lightest"></div>
+      </div>
 
+      <div className="max-w-4xl mx-auto relative z-10">
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl text-gray-darkest mb-6 font-light">
             Cómo llegar
@@ -24,9 +24,9 @@ export const HowToGetThereNew = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Taxi/Uber */}
-          <div className="bg-white p-8 rounded-lg border border-gray-light hover:shadow-lg transition-shadow duration-300">
+          <div className="bg-white/90 backdrop-blur-sm p-8 rounded-lg border border-gray-light hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
             <div className="flex items-center gap-4 mb-4">
               <div className="w-14 h-14 rounded-full bg-gray-lightest flex items-center justify-center">
                 <Car className="w-7 h-7 text-gray-darkest" />
@@ -39,7 +39,7 @@ export const HowToGetThereNew = () => {
           </div>
 
           {/* Bus */}
-          <div className="bg-white p-8 rounded-lg border border-gray-light hover:shadow-lg transition-shadow duration-300">
+          <div className="bg-white/90 backdrop-blur-sm p-8 rounded-lg border border-gray-light hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
             <div className="flex items-center gap-4 mb-4">
               <div className="w-14 h-14 rounded-full bg-gray-lightest flex items-center justify-center">
                 <Bus className="w-7 h-7 text-gray-darkest" />
@@ -57,15 +57,6 @@ export const HowToGetThereNew = () => {
               </div>
             </div>
           </div>
-        </div>
-
-        {/* Block image - optional decorative element */}
-        <div className="rounded-lg overflow-hidden">
-          <img 
-            src="/assets/Bloque-como-llegar.jpg"
-            alt=""
-            className="w-full h-48 object-cover grayscale opacity-40"
-          />
         </div>
       </div>
     </section>

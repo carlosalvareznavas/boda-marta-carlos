@@ -8,8 +8,18 @@ export const VenueSection = () => {
   };
 
   return (
-    <section className="py-20 px-6 bg-gray-lightest">
-      <div className="max-w-4xl mx-auto">
+    <section className="py-20 px-6 relative overflow-hidden">
+      {/* Background image - Imagen-como-llegar.jpg */}
+      <div className="absolute inset-0 z-0">
+        <img 
+          src="/assets/Imagen-como-llegar.jpg"
+          alt=""
+          className="w-full h-full object-cover grayscale opacity-30"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-white via-white/80 to-white"></div>
+      </div>
+
+      <div className="max-w-4xl mx-auto relative z-10">
         {/* Decorative emblem */}
         <div className="flex justify-center mb-8">
           <img 
