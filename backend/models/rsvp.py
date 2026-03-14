@@ -15,6 +15,7 @@ class RSVPCreate(BaseModel):
     phone: str
     email: Optional[EmailStr] = None
     comments: Optional[str] = ''
+    song_request: Optional[str] = ''  # Campo de canción añadido
 
 class RSVP(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
@@ -24,6 +25,7 @@ class RSVP(BaseModel):
     phone: str
     email: Optional[str]
     comments: Optional[str]
+    song_request: Optional[str] = ''  # Campo de canción añadido
     submitted_at: datetime = Field(default_factory=datetime.utcnow)
     
     class Config:
@@ -45,6 +47,7 @@ class RSVP(BaseModel):
                 ],
                 "phone": "634123456",
                 "email": "juan@example.com",
-                "comments": "Llegamos un poco tarde"
+                "comments": "Llegamos un poco tarde",
+                "song_request": "Despacito"
             }
         }

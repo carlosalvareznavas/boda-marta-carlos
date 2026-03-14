@@ -58,12 +58,13 @@ class GoogleSheetsService:
                     'Teléfono',
                     'Email',
                     'Comentarios',
+                    'Canción',
                     'ID'
                 ]]
                 
                 self.service.spreadsheets().values().update(
                     spreadsheetId=self.spreadsheet_id,
-                    range='A1:J1',
+                    range='A1:K1',
                     valueInputOption='RAW',
                     body={'values': headers}
                 ).execute()
@@ -104,7 +105,7 @@ class GoogleSheetsService:
             # Append row
             self.service.spreadsheets().values().append(
                 spreadsheetId=self.spreadsheet_id,
-                range='A:J',
+                range='A:K',
                 valueInputOption='RAW',
                 insertDataOption='INSERT_ROWS',
                 body={'values': [row]}

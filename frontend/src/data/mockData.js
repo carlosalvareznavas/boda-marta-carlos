@@ -59,14 +59,10 @@ export const submitRSVP = async (formData) => {
       number_of_guests: formData.numberOfGuests,
       guests: formData.guests,
       phone: formData.phone,
-      email: formData.email || null,
-      comments: formData.comments || null
+      email: formData.email || '',
+      comments: formData.comments || '',
+      song_request: formData.songRequest || ''
     };
-    
-    // Add song_request only if it exists
-    if (formData.songRequest) {
-      payload.song_request = formData.songRequest;
-    }
     
     console.log('Sending RSVP:', payload);
     
@@ -79,9 +75,16 @@ export const submitRSVP = async (formData) => {
     });
     
     if (!response.ok) {
-      const error = await response.json();
-      console.error('Backend error:', error);
-      throw new Error(error.detail || 'Error al enviar confirmación');
+      const errorText = await response.text();
+      console.error('Backend error response:', errorText);
+      let errorMessage = 'Error al enviar confirmación';
+      try {
+        const errorJson = JSON.parse(errorText);
+        errorMessage = errorJson.detail || errorMessage;
+      } catch (e) {
+        // If not JSON, use the text
+      }
+      throw new Error(errorMessage);
     }
     
     const data = await response.json();
