@@ -33,7 +33,7 @@ export const OurStory = () => {
   }, []);
 
   return (
-    <section className="py-20 px-6 bg-gray-lightest">
+    <section className="py-20 px-6 bg-gray-lightest" id="nuestra-historia">
       <div className="max-w-5xl mx-auto">
         {/* Decorative emblem */}
         <div className="flex justify-center mb-8">
@@ -80,8 +80,8 @@ export const OurStory = () => {
 
         {/* Timeline */}
         <div className="relative" ref={timelineRef}>
-          {/* Vertical line */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-px bg-gray-light hidden md:block"></div>
+          {/* Vertical line - now visible on mobile too */}
+          <div className="absolute left-8 md:left-1/2 transform md:-translate-x-1/2 h-full w-px bg-gray-light"></div>
 
           {/* Timeline events */}
           <div className="space-y-12">
@@ -93,11 +93,11 @@ export const OurStory = () => {
                   visibleItems.includes(index) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
                 }`}
               >
-                <div className={`flex flex-col md:flex-row items-center gap-6 ${
+                <div className={`flex flex-col md:flex-row items-start md:items-center gap-6 ${
                   index % 2 === 0 ? 'md:flex-row-reverse' : ''
                 }`}>
                   {/* Content */}
-                  <div className={`flex-1 ${index % 2 === 0 ? 'md:text-right' : 'md:text-left'} text-center md:text-left`}>
+                  <div className={`flex-1 ml-16 md:ml-0 ${index % 2 === 0 ? 'md:text-right' : 'md:text-left'} text-left`}>
                     <div className="bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 border border-gray-light">
                       <h3 className="text-xl md:text-2xl font-normal text-gray-darkest mb-2">
                         {event.year}
@@ -111,8 +111,8 @@ export const OurStory = () => {
                     </div>
                   </div>
 
-                  {/* Center dot */}
-                  <div className="hidden md:flex w-4 h-4 rounded-full bg-gray-darkest border-4 border-gray-lightest flex-shrink-0 z-10"></div>
+                  {/* Center dot - visible on mobile (left side) and desktop (center) */}
+                  <div className="absolute left-6 md:left-auto md:relative w-4 h-4 rounded-full bg-gray-darkest border-4 border-gray-lightest flex-shrink-0 z-10"></div>
 
                   {/* Spacer for alternating layout */}
                   <div className="flex-1 hidden md:block"></div>

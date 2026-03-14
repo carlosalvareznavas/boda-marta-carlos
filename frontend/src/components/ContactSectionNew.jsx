@@ -4,7 +4,7 @@ import { Button } from './ui/button';
 
 export const ContactSectionNew = () => {
   return (
-    <section className="py-20 px-6 bg-white">
+    <section className="py-20 px-6 bg-white" id="contacto">
       <div className="max-w-3xl mx-auto text-center">
         <div className="mb-8">
           <h2 className="text-4xl md:text-5xl text-gray-darkest mb-6 font-light">

@@ -3,7 +3,7 @@ import { Car, Bus } from 'lucide-react';
 
 export const HowToGetThereNew = () => {
   return (
-    <section className="py-20 px-6 relative overflow-hidden">
+    <section className="py-20 px-6 bg-gray-lightest" id="como-llegar">
       {/* Background image - Bloque-como-llegar.jpg */}
       <div className="absolute inset-0 z-0">
         <img 

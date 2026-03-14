@@ -1,5 +1,6 @@
 import React from "react";
 import "./App.css";
+import { HamburgerMenu } from "./components/HamburgerMenu";
 import { HeroNew } from "./components/HeroNew";
 import { VenueSection } from "./components/VenueSection";
 import { RSVPSectionNew } from "./components/RSVPSectionNew";
@@ -12,6 +13,7 @@ import { Toaster } from "./components/ui/sonner";
 function App() {
   return (
     <div className="App">
+      <HamburgerMenu />
       <HeroNew />
       <VenueSection />
       <RSVPSectionNew />
