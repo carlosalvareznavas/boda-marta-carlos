@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from './ui/button';
 import { AddToCalendar } from './AddToCalendar';
 import heroImg from '../assets/hero-couple-kiss.jpg';
 
 export const HeroNew = () => {
+  const [pastHero, setPastHero] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setPastHero(window.scrollY > window.innerHeight * 0.7);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   const scrollToRSVP = () => {
     const element = document.getElementById('rsvp');
     if (element) {
@@ -27,7 +35,7 @@ export const HeroNew = () => {
 
       {/* Vertical text on the side - fixed top right, reading downwards */}
       <div className="fixed right-6 top-24 z-20">
-        <p className="text-xs md:text-sm text-gray-darkest font-light tracking-widest whitespace-nowrap" style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}>
+        <p className={`text-xs md:text-sm font-light tracking-widest whitespace-nowrap transition-colors duration-500 ${pastHero ? 'text-gray-darkest' : 'text-white'}`} style={{ writingMode: 'vertical-rl', textOrientation: 'mixed', textShadow: pastHero ? 'none' : '0 1px 3px rgba(0,0,0,0.4)' }}>
           La Chumbera, Sacromonte, Granada · 27 junio 2026
         </p>
       </div>
