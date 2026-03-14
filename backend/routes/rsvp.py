@@ -23,7 +23,8 @@ async def create_rsvp(rsvp_input: RSVPCreate):
             guests=[guest.dict() for guest in rsvp_input.guests],
             phone=rsvp_input.phone,
             email=rsvp_input.email,
-            comments=rsvp_input.comments
+            comments=rsvp_input.comments,
+            song_request=rsvp_input.song_request
         )
         
         # Save to MongoDB
