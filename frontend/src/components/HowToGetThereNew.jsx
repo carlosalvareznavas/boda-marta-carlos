@@ -26,7 +26,7 @@ export const HowToGetThereNew = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Taxi/Uber */}
-          <div className="bg-white/90 backdrop-blur-sm p-8 rounded-lg border border-gray-light hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+          <div className="p-8 hover:bg-white/50 rounded-lg transition-all duration-300">
             <div className="flex items-center gap-4 mb-4">
               <div className="w-14 h-14 rounded-full bg-gray-lightest flex items-center justify-center">
                 <Car className="w-7 h-7 text-gray-darkest" />
@@ -39,7 +39,7 @@ export const HowToGetThereNew = () => {
           </div>
 
           {/* Bus */}
-          <div className="bg-white/90 backdrop-blur-sm p-8 rounded-lg border border-gray-light hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
+          <div className="p-8 hover:bg-white/50 rounded-lg transition-all duration-300">
             <div className="flex items-center gap-4 mb-4">
               <div className="w-14 h-14 rounded-full bg-gray-lightest flex items-center justify-center">
                 <Bus className="w-7 h-7 text-gray-darkest" />

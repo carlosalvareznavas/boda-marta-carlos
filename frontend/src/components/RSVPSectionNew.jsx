@@ -129,7 +129,7 @@ export const RSVPSectionNew = () => {
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-8 bg-gray-lightest p-8 md:p-12 rounded-lg border border-gray-light">
+        <form onSubmit={handleSubmit} className="space-y-8 p-8 md:p-12">
           {/* Number of Guests */}
           <div className="space-y-4">
             <Label className="text-lg font-normal text-gray-darkest">
@@ -139,7 +139,7 @@ export const RSVPSectionNew = () => {
               <SelectTrigger className="w-full bg-white border border-gray-light focus:border-gray-darkest rounded-lg py-6 text-lg">
                 <SelectValue />
               </SelectTrigger>
-              <SelectContent>
+              <SelectContent className="bg-white">
                 {[1, 2, 3, 4, 5, 6].map(num => (
                   <SelectItem key={num} value={num.toString()}>
                     {num} {num === 1 ? 'persona' : 'personas'}
@@ -183,7 +183,7 @@ export const RSVPSectionNew = () => {
                     >
                       <SelectValue placeholder="Adulto" />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="bg-white">
                       {ageCategories.map(category => (
                         <SelectItem key={category.value} value={category.value}>
                           {category.label}
@@ -273,7 +273,7 @@ export const RSVPSectionNew = () => {
           </div>
 
           {/* Privacy */}
-          <div className="flex items-start space-x-3 p-4 rounded-lg bg-white border border-gray-light">
+          <div className="flex items-start space-x-3 p-4">
             <Checkbox
               id="privacy"
               checked={privacyAccepted}

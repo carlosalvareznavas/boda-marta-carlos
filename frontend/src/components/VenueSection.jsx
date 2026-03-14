@@ -14,9 +14,9 @@ export const VenueSection = () => {
         <img 
           src="/assets/Imagen-como-llegar.jpg"
           alt=""
-          className="w-full h-full object-cover grayscale opacity-30"
+          className="w-full h-full object-cover grayscale opacity-60"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-white via-white/80 to-white"></div>
+        <div className="absolute inset-0 bg-gradient-to-b from-white/60 via-white/70 to-white"></div>
       </div>
 
       <div className="max-w-4xl mx-auto relative z-10">
