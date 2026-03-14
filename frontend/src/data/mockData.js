@@ -54,27 +54,38 @@ export const submitRSVP = async (formData) => {
   const API = `${BACKEND_URL}/api`;
   
   try {
+    const payload = {
+      attending: formData.attending,
+      number_of_guests: formData.numberOfGuests,
+      guests: formData.guests,
+      phone: formData.phone,
+      email: formData.email || null,
+      comments: formData.comments || null
+    };
+    
+    // Add song_request only if it exists
+    if (formData.songRequest) {
+      payload.song_request = formData.songRequest;
+    }
+    
+    console.log('Sending RSVP:', payload);
+    
     const response = await fetch(`${API}/rsvp`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        attending: formData.attending,
-        number_of_guests: formData.numberOfGuests,
-        guests: formData.guests,
-        phone: formData.phone,
-        email: formData.email || null,
-        comments: formData.comments || null
-      })
+      body: JSON.stringify(payload)
     });
     
     if (!response.ok) {
       const error = await response.json();
+      console.error('Backend error:', error);
       throw new Error(error.detail || 'Error al enviar confirmación');
     }
     
     const data = await response.json();
+    console.log('RSVP response:', data);
     return { success: true, data, message: 'Confirmación enviada correctamente' };
   } catch (error) {
     console.error('Error submitting RSVP:', error);
