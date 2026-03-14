@@ -99,6 +99,7 @@ class GoogleSheetsService:
                 rsvp_data['phone'],
                 rsvp_data.get('email', '-'),
                 rsvp_data.get('comments', '-'),
+                rsvp_data.get('song_request', '-'),
                 rsvp_data.get('id', '-')
             ]
             
