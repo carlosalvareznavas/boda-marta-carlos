@@ -1,6 +1,7 @@
 import React from 'react';
 import { Button } from './ui/button';
 import { AddToCalendar } from './AddToCalendar';
+import heroImg from '../assets/hero-couple-kiss.jpg';
 
 export const HeroNew = () => {
   const scrollToRSVP = () => {
@@ -15,9 +16,10 @@ export const HeroNew = () => {
       {/* Hero Image - Full bleed */}
       <div className="relative w-full h-screen">
         <img 
-          src="/assets/Imagen-HERO.jpg"
+          src={heroImg}
           alt="Marta y Carlos"
           className="w-full h-full object-cover grayscale"
+          style={{ objectPosition: 'center 30%' }}
         />
         {/* Subtle gradient at bottom for text transition */}
         <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white to-transparent"></div>
