@@ -23,9 +23,9 @@ export const HeroNew = () => {
         <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white to-transparent"></div>
       </div>
 
-      {/* Vertical text on the side */}
-      <div className="absolute left-8 top-1/2 transform -translate-y-1/2 -rotate-90 origin-center z-20">
-        <p className="text-sm md:text-base text-gray-darkest font-light tracking-widest whitespace-nowrap">
+      {/* Vertical text on the side - fixed top right */}
+      <div className="fixed right-8 top-8 transform rotate-90 origin-top-right z-20">
+        <p className="text-xs md:text-sm text-gray-darkest font-light tracking-widest whitespace-nowrap">
           La Chumbera, Sacromonte, Granada · 27 junio 2026
         </p>
       </div>
@@ -59,7 +59,7 @@ export const HeroNew = () => {
         </div>
 
         {/* CTA Buttons */}
-        <div className="flex flex-col items-center gap-4">
+        <div className="flex flex-col items-center gap-4 mb-20">
           <Button 
             onClick={scrollToRSVP}
             className="bg-gray-darkest hover:bg-black text-white px-10 py-6 text-lg rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105 font-normal"
@@ -72,13 +72,15 @@ export const HeroNew = () => {
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 animate-bounce">
-        <img 
-          src="/assets/scroll.png"
-          alt=""
-          className="h-12 w-auto opacity-60 drop-shadow-md"
-        />
+      {/* Scroll indicator - positioned below calendar buttons */}
+      <div className="relative w-full flex justify-center pb-8">
+        <div className="animate-bounce">
+          <img 
+            src="/assets/scroll.png"
+            alt=""
+            className="h-12 w-auto opacity-60 drop-shadow-md"
+          />
+        </div>
       </div>
     </section>
   );

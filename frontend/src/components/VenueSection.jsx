@@ -3,10 +3,6 @@ import { MapPin, ExternalLink } from 'lucide-react';
 import { Button } from './ui/button';
 
 export const VenueSection = () => {
-  const openGoogleMaps = () => {
-    window.open('https://maps.app.goo.gl/fVVcUixPy494YxpK9?g_st=com.google.maps.preview.copy', '_blank');
-  };
-
   return (
     <section className="py-20 px-6 relative overflow-hidden">
       {/* Background image - Imagen-como-llegar.jpg */}
@@ -53,23 +49,30 @@ export const VenueSection = () => {
         {/* Google Maps Link */}
         <div className="flex justify-center items-center gap-2 mb-6">
           <MapPin className="w-5 h-5 text-gray-dark" />
-          <button
-            onClick={openGoogleMaps}
+          <a
+            href="https://maps.app.goo.gl/fVVcUixPy494YxpK9"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-gray-darkest hover:text-black underline underline-offset-4 transition-colors duration-300 flex items-center gap-2"
           >
             Abrir en Google Maps
             <ExternalLink className="w-4 h-4" />
-          </button>
+          </a>
         </div>
 
         {/* CTA Button */}
         <div className="flex justify-center">
-          <Button 
-            onClick={openGoogleMaps}
-            className="bg-gray-darkest hover:bg-black text-white px-8 py-5 text-base rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+          <a
+            href="https://maps.app.goo.gl/fVVcUixPy494YxpK9"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            Cómo llegar
-          </Button>
+            <Button 
+              className="bg-gray-darkest hover:bg-black text-white px-8 py-5 text-base rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+            >
+              Cómo llegar
+            </Button>
+          </a>
         </div>
       </div>
     </section>
