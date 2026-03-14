@@ -1,18 +1,11 @@
 .App {
   min-height: 100vh;
+  background: #ffffff;
 }
 
-/* Hero specific styles */
-.hero-section {
-  position: relative;
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-}
-
-/* Image hover effects */
-img {
-  transition: transform 500ms ease-in-out;
+/* Grayscale filter for images */
+.grayscale {
+  filter: grayscale(100%);
 }
 
 /* Smooth anchor scrolling */
@@ -21,7 +14,6 @@ html {
   scroll-padding-top: 2rem;
 }
 
-/* Section spacing */
 section {
   scroll-margin-top: 2rem;
 }
@@ -29,15 +21,15 @@ section {
 /* Ensure images load nicely */
 img[src] {
   opacity: 1;
-  transition: opacity 300ms ease-in;
+  transition: opacity 400ms ease-in;
 }
 
 img:not([src]) {
   opacity: 0;
 }
 
-/* Decorative elements subtle animation */
-@keyframes float {
+/* Bounce animation for scroll indicator */
+@keyframes bounce {
   0%, 100% {
     transform: translateY(0);
   }
@@ -46,6 +38,6 @@ img:not([src]) {
   }
 }
 
-.animate-float {
-  animation: float 6s ease-in-out infinite;
+.animate-bounce {
+  animation: bounce 2s ease-in-out infinite;
 }
