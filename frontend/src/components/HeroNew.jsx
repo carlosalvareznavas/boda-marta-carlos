@@ -23,9 +23,9 @@ export const HeroNew = () => {
         <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white to-transparent"></div>
       </div>
 
-      {/* Vertical text on the side - fixed top right */}
-      <div className="fixed right-8 top-8 transform rotate-90 origin-top-right z-20">
-        <p className="text-xs md:text-sm text-gray-darkest font-light tracking-widest whitespace-nowrap">
+      {/* Vertical text on the side - fixed top right, reading downwards */}
+      <div className="fixed right-6 top-24 z-20">
+        <p className="text-xs md:text-sm text-gray-darkest font-light tracking-widest whitespace-nowrap" style={{ writingMode: 'vertical-rl', textOrientation: 'mixed' }}>
           La Chumbera, Sacromonte, Granada · 27 junio 2026
         </p>
       </div>
