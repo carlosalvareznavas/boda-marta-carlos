@@ -54,10 +54,17 @@ export const submitRSVP = async (formData) => {
   const API = `${BACKEND_URL}/api`;
   
   try {
+    // Convert camelCase to snake_case for backend
+    const guests = formData.guests.map(guest => ({
+      name: guest.name,
+      age_category: guest.ageCategory,  // Convert camelCase to snake_case
+      allergies: guest.allergies || ''
+    }));
+    
     const payload = {
       attending: formData.attending,
       number_of_guests: formData.numberOfGuests,
-      guests: formData.guests,
+      guests: guests,
       phone: formData.phone,
       email: formData.email || '',
       comments: formData.comments || '',
@@ -65,7 +72,6 @@ export const submitRSVP = async (formData) => {
     };
     
     console.log('Sending RSVP:', payload);
-    console.log('Guests array:', JSON.stringify(formData.guests));
     
     const response = await fetch(`${API}/rsvp`, {
       method: 'POST',
@@ -95,7 +101,7 @@ export const submitRSVP = async (formData) => {
     }
     
     const data = JSON.parse(responseText);
-    console.log('RSVP response:', data);
+    console.log('RSVP enviado correctamente:', data);
     return { success: true, data, message: 'Confirmación enviada correctamente' };
   } catch (error) {
     console.error('Error submitting RSVP:', error);
