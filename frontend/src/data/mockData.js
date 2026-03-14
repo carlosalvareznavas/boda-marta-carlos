@@ -65,6 +65,7 @@ export const submitRSVP = async (formData) => {
     };
     
     console.log('Sending RSVP:', payload);
+    console.log('Guests array:', JSON.stringify(formData.guests));
     
     const response = await fetch(`${API}/rsvp`, {
       method: 'POST',
@@ -74,20 +75,26 @@ export const submitRSVP = async (formData) => {
       body: JSON.stringify(payload)
     });
     
+    // Read response only once
+    const responseText = await response.text();
+    
     if (!response.ok) {
-      const errorText = await response.text();
-      console.error('Backend error response:', errorText);
+      console.error('Backend error (status ' + response.status + '):', responseText);
       let errorMessage = 'Error al enviar confirmación';
       try {
-        const errorJson = JSON.parse(errorText);
+        const errorJson = JSON.parse(responseText);
+        console.error('Error details:', errorJson);
         errorMessage = errorJson.detail || errorMessage;
+        if (typeof errorMessage === 'object') {
+          errorMessage = JSON.stringify(errorMessage);
+        }
       } catch (e) {
-        // If not JSON, use the text
+        errorMessage = responseText || errorMessage;
       }
       throw new Error(errorMessage);
     }
     
-    const data = await response.json();
+    const data = JSON.parse(responseText);
     console.log('RSVP response:', data);
     return { success: true, data, message: 'Confirmación enviada correctamente' };
   } catch (error) {
