@@ -1,189 +1,46 @@
+@import url('/assets/fonts.css');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 body {
-    margin: 0;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
-        "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-        "Helvetica Neue", sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    scroll-behavior: smooth;
-}
-
-code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-        monospace;
-}
-
-/* Font families */
-.font-serif {
-  font-family: 'Cormorant Garamond', serif;
-}
-
-@layer base {
-  :root {
-    /* Base colors */
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
-    
-    /* Boho terracota palette */
-    --terracota: 16 72% 55%;
-    --terracota-dark: 16 72% 45%;
-    --terracota-light: 16 72% 65%;
-    
-    /* Olive green palette */
-    --olive: 85 30% 28%;
-    --olive-dark: 85 35% 20%;
-    --olive-light: 85 25% 92%;
-    
-    /* Cream/sand */
-    --cream: 35 30% 94%;
-    --sand: 35 25% 85%;
-    
-    /* Accent gold */
-    --gold: 43 85% 58%;
-    --gold-muted: 43 70% 75%;
-    
-    /* Shadcn defaults adjusted */
-    --card: 0 0% 100%;
-    --card-foreground: 85 30% 28%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 85 30% 28%;
-    --primary: 16 72% 55%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 35 30% 94%;
-    --secondary-foreground: 85 30% 28%;
-    --muted: 35 30% 94%;
-    --muted-foreground: 85 20% 45%;
-    --accent: 43 85% 58%;
-    --accent-foreground: 85 35% 20%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 85 20% 85%;
-    --input: 85 20% 85%;
-    --ring: 16 72% 55%;
-    --radius: 1rem;
-  }
-
-  .dark {
-    --background: 85 30% 10%;
-    --foreground: 0 0% 98%;
-    --card: 85 30% 12%;
-    --card-foreground: 0 0% 98%;
-    --popover: 85 30% 10%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 16 72% 55%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 85 25% 18%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 85 25% 18%;
-    --muted-foreground: 35 20% 65%;
-    --accent: 43 85% 58%;
-    --accent-foreground: 0 0% 10%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 85 20% 25%;
-    --input: 85 20% 25%;
-    --ring: 16 72% 55%;
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
+  font-family: 'American Typewriter', 'Courier New', monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #ffffff;
+  color: #1a1a1a;
+  scroll-behavior: smooth;
 }
 
 @layer utilities {
-  /* Custom colors */
-  .bg-terracota {
-    background-color: hsl(var(--terracota));
-  }
-  .bg-terracota-dark {
-    background-color: hsl(var(--terracota-dark));
-  }
-  .bg-terracota-light {
-    background-color: hsl(var(--terracota-light));
-  }
-  .bg-olive {
-    background-color: hsl(var(--olive));
-  }
-  .bg-olive-dark {
-    background-color: hsl(var(--olive-dark));
-  }
-  .bg-olive-light {
-    background-color: hsl(var(--olive-light));
-  }
-  .bg-cream {
-    background-color: hsl(var(--cream));
-  }
-  .bg-sand {
-    background-color: hsl(var(--sand));
-  }
-  .bg-gold {
-    background-color: hsl(var(--gold));
-  }
-
-  .text-terracota {
-    color: hsl(var(--terracota));
-  }
-  .text-terracota-dark {
-    color: hsl(var(--terracota-dark));
-  }
-  .text-olive {
-    color: hsl(var(--olive));
-  }
-  .text-olive-dark {
-    color: hsl(var(--olive-dark));
-  }
-  .text-gold {
-    color: hsl(var(--gold));
-  }
-
-  .border-terracota {
-    border-color: hsl(var(--terracota));
-  }
-  .border-olive {
-    border-color: hsl(var(--olive));
-  }
-
-  /* Animations */
-  .animate-fade-in {
-    animation: fadeIn 1.2s ease-in forwards;
-  }
-
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .animate-slide-up {
-    animation: slideUp 0.8s ease-out forwards;
-  }
-
-  @keyframes slideUp {
-    from {
-      opacity: 0;
-      transform: translateY(40px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
+  /* Grayscale palette */
+  .bg-black { background-color: #000000; }
+  .bg-gray-darkest { background-color: #1a1a1a; }
+  .bg-gray-darker { background-color: #2d2d2d; }
+  .bg-gray-dark { background-color: #4a4a4a; }
+  .bg-gray { background-color: #808080; }
+  .bg-gray-light { background-color: #d4d4d4; }
+  .bg-gray-lighter { background-color: #e8e8e8; }
+  .bg-gray-lightest { background-color: #f5f5f5; }
+  .bg-white { background-color: #ffffff; }
+  
+  .text-black { color: #000000; }
+  .text-gray-darkest { color: #1a1a1a; }
+  .text-gray-darker { color: #2d2d2d; }
+  .text-gray-dark { color: #4a4a4a; }
+  .text-gray { color: #808080; }
+  .text-gray-light { color: #b8b8b8; }
+  .text-white { color: #ffffff; }
+  
+  .border-gray-dark { border-color: #4a4a4a; }
+  .border-gray { border-color: #808080; }
+  .border-gray-light { border-color: #d4d4d4; }
 }
 
 /* Smooth transitions for interactive elements */
@@ -192,37 +49,29 @@ a,
 input,
 select,
 textarea {
-  transition-property: background-color, border-color, color, transform, box-shadow;
+  transition-property: background-color, border-color, color, transform, box-shadow, opacity;
   transition-duration: 300ms;
   transition-timing-function: ease-in-out;
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: hsl(var(--cream));
-}
-
-::-webkit-scrollbar-thumb {
-  background: hsl(var(--terracota));
-  border-radius: 5px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: hsl(var(--terracota-dark));
-}
-
 /* Selection color */
 ::selection {
-  background-color: hsl(var(--terracota) / 0.3);
-  color: hsl(var(--olive-dark));
+  background-color: rgba(0, 0, 0, 0.15);
+  color: #000000;
 }
 
 /* Focus visible for accessibility */
 *:focus-visible {
-  outline: 2px solid hsl(var(--terracota));
+  outline: 2px solid #1a1a1a;
   outline-offset: 2px;
+}
+
+/* Smooth anchor scrolling */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 2rem;
+}
+
+section {
+  scroll-margin-top: 2rem;
 }
