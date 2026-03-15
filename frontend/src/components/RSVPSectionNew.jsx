@@ -53,7 +53,7 @@ export const RSVPSectionNew = () => {
           { value: 'lasana-bolonesa', label: 'Lasaña boloñesa casera' },
           { value: 'medallones-solomillo', label: 'Medallones de solomillo ibérico con patatas fritas' }
         ];
-      case 'niño':
+      case 'nino':
         return [
           { value: 'escalope', label: 'Escalope casero con patatas fritas' },
           { value: 'pollo-empanado', label: 'Pollo empanado con patatas fritas' },
