@@ -11,22 +11,44 @@ logger = logging.getLogger(__name__)
 class GoogleSheetsService:
     def __init__(self):
         self.spreadsheet_id = os.environ.get('GOOGLE_SHEETS_ID', '')
-        self.credentials_path = os.environ.get('GOOGLE_CREDENTIALS_PATH', '/app/backend/google-credentials.json')
         self.service = None
         
-        if os.path.exists(self.credentials_path):
+        credentials = None
+        
+        # Try loading from JSON env var first (production)
+        creds_json = os.environ.get('GOOGLE_CREDENTIALS_JSON', '')
+        if creds_json:
             try:
-                credentials = service_account.Credentials.from_service_account_file(
-                    self.credentials_path,
+                creds_info = json.loads(creds_json)
+                credentials = service_account.Credentials.from_service_account_info(
+                    creds_info,
                     scopes=['https://www.googleapis.com/auth/spreadsheets']
                 )
+                logger.info("Google credentials loaded from environment variable")
+            except Exception as e:
+                logger.error(f"Failed to load Google credentials from env: {e}")
+        
+        # Fallback to file (local development)
+        if not credentials:
+            credentials_path = os.environ.get('GOOGLE_CREDENTIALS_PATH', '/app/backend/google-credentials.json')
+            if os.path.exists(credentials_path):
+                try:
+                    credentials = service_account.Credentials.from_service_account_file(
+                        credentials_path,
+                        scopes=['https://www.googleapis.com/auth/spreadsheets']
+                    )
+                    logger.info("Google credentials loaded from file")
+                except Exception as e:
+                    logger.error(f"Failed to load Google credentials from file: {e}")
+        
+        if credentials:
+            try:
                 self.service = build('sheets', 'v4', credentials=credentials)
                 logger.info("Google Sheets service initialized successfully")
             except Exception as e:
-                logger.error(f"Failed to initialize Google Sheets service: {e}")
-                self.service = None
+                logger.error(f"Failed to build Google Sheets service: {e}")
         else:
-            logger.warning(f"Google credentials file not found at {self.credentials_path}")
+            logger.warning("No Google credentials found")
     
     def is_configured(self):
         """Check if Google Sheets is properly configured"""
