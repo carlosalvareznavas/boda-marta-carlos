@@ -105,6 +105,9 @@ class GoogleSheetsService:
             return False
         
         try:
+            # Ensure headers exist
+            self.initialize_sheet()
+            
             timestamp = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')
             family_id = rsvp_data.get('id', '-')
             attending = 'Sí' if rsvp_data['attending'] == 'si' else 'No'
