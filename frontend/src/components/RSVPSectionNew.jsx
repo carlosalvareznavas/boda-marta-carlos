@@ -11,7 +11,7 @@ import { toast } from 'sonner';
 
 export const RSVPSectionNew = () => {
   const [numberOfGuests, setNumberOfGuests] = useState(1);
-  const [guests, setGuests] = useState([{ name: '', ageCategory: '', allergies: '' }]);
+  const [guests, setGuests] = useState([{ name: '', ageCategory: '', mainDish: '', allergies: '' }]);
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [comments, setComments] = useState('');
@@ -26,7 +26,7 @@ export const RSVPSectionNew = () => {
     
     const newGuests = [];
     for (let i = 0; i < num; i++) {
-      newGuests.push(guests[i] || { name: '', ageCategory: '', allergies: '' });
+      newGuests.push(guests[i] || { name: '', ageCategory: '', mainDish: '', allergies: '' });
     }
     setGuests(newGuests);
   };
@@ -34,7 +34,34 @@ export const RSVPSectionNew = () => {
   const handleGuestChange = (index, field, value) => {
     const newGuests = [...guests];
     newGuests[index] = { ...newGuests[index], [field]: value };
+    // Reset mainDish when ageCategory changes
+    if (field === 'ageCategory') {
+      newGuests[index].mainDish = '';
+    }
     setGuests(newGuests);
+  };
+
+  const getDishOptions = (ageCategory) => {
+    switch (ageCategory) {
+      case 'adulto':
+        return [
+          { value: 'carne', label: 'Carne' },
+          { value: 'pescado', label: 'Pescado' }
+        ];
+      case 'adolescente':
+        return [
+          { value: 'lasana-bolonesa', label: 'Lasaña boloñesa casera' },
+          { value: 'medallones-solomillo', label: 'Medallones de solomillo ibérico con patatas fritas' }
+        ];
+      case 'niño':
+        return [
+          { value: 'escalope', label: 'Escalope casero con patatas fritas' },
+          { value: 'pollo-empanado', label: 'Pollo empanado con patatas fritas' },
+          { value: 'burger-ternera', label: 'Burger de ternera con queso cheddar y patatas fritas' }
+        ];
+      default:
+        return [];
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -64,6 +91,12 @@ export const RSVPSectionNew = () => {
     const hasEmptyAgeCategory = guests.some(guest => !guest.ageCategory);
     if (hasEmptyAgeCategory) {
       toast.error('Por favor, indica la categoría de cada asistente');
+      return;
+    }
+
+    const hasEmptyDish = guests.some(guest => guest.ageCategory && !guest.mainDish);
+    if (hasEmptyDish) {
+      toast.error('Por favor, selecciona el plato principal de cada asistente');
       return;
     }
 
@@ -171,7 +204,7 @@ export const RSVPSectionNew = () => {
                 </div>
                 <div>
                   <Label htmlFor={`guest-age-${index}`} className="text-gray-darkest">
-                    Categoría <span className="text-gray-dark">*</span>
+                    Tipo de comensal <span className="text-gray-dark">*</span>
                   </Label>
                   <Select 
                     value={guest.ageCategory} 
@@ -192,6 +225,35 @@ export const RSVPSectionNew = () => {
                     </SelectContent>
                   </Select>
                 </div>
+                {guest.ageCategory && (
+                  <div>
+                    <p className="text-sm text-gray-dark italic mb-3">
+                      Cóctel largo, brindis, música… y en mesa, el toque final: elige tu plato principal.
+                    </p>
+                    <Label htmlFor={`guest-dish-${index}`} className="text-gray-darkest">
+                      Plato principal <span className="text-gray-dark">*</span>
+                    </Label>
+                    <Select 
+                      value={guest.mainDish} 
+                      onValueChange={(value) => handleGuestChange(index, 'mainDish', value)}
+                    >
+                      <SelectTrigger 
+                        id={`guest-dish-${index}`}
+                        data-testid={`guest-dish-${index}`}
+                        className="mt-2 w-full bg-white border border-gray-light focus:border-gray-darkest rounded-lg py-6 text-lg"
+                      >
+                        <SelectValue placeholder="Selecciona un plato" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-white">
+                        {getDishOptions(guest.ageCategory).map(dish => (
+                          <SelectItem key={dish.value} value={dish.value}>
+                            {dish.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                )}
                 <div>
                   <Label htmlFor={`guest-allergies-${index}`} className="text-gray-darkest">
                     Alergias / intolerancias / Otra dieta (si aplica)

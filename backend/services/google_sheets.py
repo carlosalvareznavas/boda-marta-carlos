@@ -75,7 +75,8 @@ class GoogleSheetsService:
                     'ID Familia',
                     'Asiste',
                     'Nombre',
-                    'Categoría',
+                    'Tipo Comensal',
+                    'Plato Principal',
                     'Alergias / Dieta',
                     'Teléfono',
                     'Email',
@@ -85,7 +86,7 @@ class GoogleSheetsService:
                 
                 self.service.spreadsheets().values().update(
                     spreadsheetId=self.spreadsheet_id,
-                    range='A1:J1',
+                    range='A1:K1',
                     valueInputOption='RAW',
                     body={'values': headers}
                 ).execute()
@@ -115,14 +116,28 @@ class GoogleSheetsService:
             guests = rsvp_data.get('guests', [])
             rows = []
             
+            # Map dish values to readable names
+            dish_labels = {
+                'carne': 'Carne',
+                'pescado': 'Pescado',
+                'lasana-bolonesa': 'Lasaña boloñesa casera',
+                'medallones-solomillo': 'Medallones de solomillo ibérico con patatas fritas',
+                'escalope': 'Escalope casero con patatas fritas',
+                'pollo-empanado': 'Pollo empanado con patatas fritas',
+                'burger-ternera': 'Burger de ternera con queso cheddar y patatas fritas'
+            }
+            
             if guests:
                 for i, guest in enumerate(guests):
+                    dish_value = guest.get('main_dish', '-') or '-'
+                    dish_label = dish_labels.get(dish_value, dish_value)
                     row = [
                         timestamp,
                         family_id,
                         attending,
                         guest.get('name', '-'),
                         guest.get('age_category', '-'),
+                        dish_label,
                         guest.get('allergies', '-') or '-',
                         phone if i == 0 else '',
                         email if i == 0 else '',
@@ -139,6 +154,7 @@ class GoogleSheetsService:
                     '-',
                     '-',
                     '-',
+                    '-',
                     phone,
                     email,
                     comments,
@@ -148,7 +164,7 @@ class GoogleSheetsService:
             # Append all rows
             self.service.spreadsheets().values().append(
                 spreadsheetId=self.spreadsheet_id,
-                range='A:J',
+                range='A:K',
                 valueInputOption='RAW',
                 insertDataOption='INSERT_ROWS',
                 body={'values': rows}

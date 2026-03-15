@@ -6,6 +6,7 @@ import uuid
 class Guest(BaseModel):
     name: str
     age_category: str  # 'adulto', 'adolescente', 'nino'
+    main_dish: Optional[str] = ''
     allergies: Optional[str] = ''
 
 class RSVPCreate(BaseModel):

@@ -57,7 +57,8 @@ export const submitRSVP = async (formData) => {
     // Convert camelCase to snake_case for backend
     const guests = formData.guests.map(guest => ({
       name: guest.name,
-      age_category: guest.ageCategory,  // Convert camelCase to snake_case
+      age_category: guest.ageCategory,
+      main_dish: guest.mainDish || '',
       allergies: guest.allergies || ''
     }));
     
