@@ -58,10 +58,10 @@ export const OurStory = () => {
               La vida, a nuestra manera, empezó mucho antes de que lo supiéramos. En 2012, nos cruzamos de forma casual en Tánger. Fue uno de esos encuentros que pasan sin hacer ruido… pero que el tiempo se encarga de poner en su sitio.
             </p>
             <p>
-              Años después, en diciembre de 2020, nos volvimos a ver en el cumpleaños de Marta y entonces sí: nos reconocimos de verdad. Y ahí empezó lo bueno. <span className="italic">(Margarita, la hermana de Carlos, siempre dirá que ella ya lo veía venir.)</span>
+              Años después, en diciembre de 2020, nos volvimos a encontrar y entonces sí: nos reconocimos de verdad. Y ahí empezó lo bueno. <span className="italic">(Marga, la hermana de Carlos, siempre dirá que ella ya lo veía venir.)</span>
             </p>
             <p>
-              Nos unieron el mundo del marketing y la empresa, los planes que se convierten en proyectos y, entre "plan de acción" y "plan de acción", también una afición muy seria: invertir en comer bien. Entre canción y canción, viajes, sobremesas y pequeñas aventuras, fuimos construyendo una historia con ritmo propio.
+              Nos unieron el mundo del marketing y la empresa, los planes que acaban convirtiéndose en proyectos y, entre "plan de acción" y "plan de acción", también una afición muy seria: invertir en comer bien. Entre canciones, viajes, sobremesas interminables y pequeñas aventuras, fuimos construyendo una historia con ritmo propio.
             </p>
           </div>
           
@@ -73,7 +73,7 @@ export const OurStory = () => {
               Hemos vivido Grecia, Austria, Eslovaquia, Italia, Inglaterra, Rumanía, Hungría y Vietnam, y dentro de España, mil destinos que nos han ido haciendo más "nosotros": Cádiz, Bilbao, Las Palmas, Madrid… y tantos otros. Hemos hecho paracaidismo, buceo, submarinismo y hasta paseo en globo. Y lo mejor es que seguimos sumando.
             </p>
             <p>
-              Marta llegó a nuestras vidas cuando Paula y Sofía apenas tenían cuatro años, y desde entonces hemos creado una familia preciosa, cariñosa y muy nuestra, de esas que se construyen a base de paciencia, humor, abrazos y mucha verdad. Celebrar esta boda también es celebrar todo eso.
+              Durante estos años, junto a Paula y Sofía —que apenas tenían cuatro años cuando esta historia empezó—, hemos ido construyendo una familia preciosa, cariñosa y muy nuestra. Una familia hecha de paciencia, humor, abrazos y mucha verdad. Por eso, celebrar esta boda también es celebrar todo lo que hemos construido juntos.
             </p>
           </div>
         </div>
