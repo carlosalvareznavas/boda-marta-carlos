@@ -181,7 +181,7 @@ export const RSVPSectionNew = () => {
                       id={`guest-age-${index}`}
                       className="mt-2 w-full bg-white border border-gray-light focus:border-gray-darkest rounded-lg py-6 text-lg"
                     >
-                      <SelectValue placeholder="Adulto" />
+                      <SelectValue placeholder="Selecciona una opción" />
                     </SelectTrigger>
                     <SelectContent className="bg-white">
                       {ageCategories.map(category => (
@@ -194,13 +194,13 @@ export const RSVPSectionNew = () => {
                 </div>
                 <div>
                   <Label htmlFor={`guest-allergies-${index}`} className="text-gray-darkest">
-                    Alergias / intolerancias (si aplica)
+                    Alergias / intolerancias / Otra dieta (si aplica)
                   </Label>
                   <Input
                     id={`guest-allergies-${index}`}
                     value={guest.allergies}
                     onChange={(e) => handleGuestChange(index, 'allergies', e.target.value)}
-                    placeholder="Indica alergias, intolerancias alimen"
+                    placeholder="Indica alergias, intolerancias, dieta vegetariana..."
                     className="mt-2 bg-white border border-gray-light focus:border-gray-darkest rounded-lg py-6"
                   />
                 </div>

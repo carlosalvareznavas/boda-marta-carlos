@@ -63,30 +63,29 @@ class GoogleSheetsService:
             # Check if headers exist
             result = self.service.spreadsheets().values().get(
                 spreadsheetId=self.spreadsheet_id,
-                range='A1:J1'
+                range='A1:K1'
             ).execute()
             
             values = result.get('values', [])
             
             if not values:
-                # Add headers
+                # Add headers - one row per person structure
                 headers = [[
                     'Fecha y Hora',
+                    'ID Familia',
                     'Asiste',
-                    'Nº Asistentes',
-                    'Nombres',
-                    'Categorías',
-                    'Alergias',
+                    'Nombre',
+                    'Categoría',
+                    'Alergias / Dieta',
                     'Teléfono',
                     'Email',
                     'Comentarios',
-                    'Canción',
-                    'ID'
+                    'Canción'
                 ]]
                 
                 self.service.spreadsheets().values().update(
                     spreadsheetId=self.spreadsheet_id,
-                    range='A1:K1',
+                    range='A1:J1',
                     valueInputOption='RAW',
                     body={'values': headers}
                 ).execute()
@@ -99,42 +98,63 @@ class GoogleSheetsService:
             return False
     
     def add_rsvp(self, rsvp_data):
-        """Add RSVP response to Google Sheets"""
+        """Add RSVP response to Google Sheets - one row per guest"""
         if not self.is_configured():
             logger.warning("Google Sheets not configured, skipping")
             return False
         
         try:
-            # Format guest data
-            names = [guest['name'] for guest in rsvp_data.get('guests', [])]
-            categories = [guest['age_category'] for guest in rsvp_data.get('guests', [])]
-            allergies = [guest['allergies'] or '-' for guest in rsvp_data.get('guests', [])]
+            timestamp = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')
+            family_id = rsvp_data.get('id', '-')
+            attending = 'Sí' if rsvp_data['attending'] == 'si' else 'No'
+            phone = rsvp_data.get('phone', '-')
+            email = rsvp_data.get('email', '-') or '-'
+            comments = rsvp_data.get('comments', '-') or '-'
+            song_request = rsvp_data.get('song_request', '-') or '-'
             
-            # Create row
-            row = [
-                datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S'),
-                'Sí' if rsvp_data['attending'] == 'si' else 'No',
-                str(rsvp_data.get('number_of_guests', 0)),
-                ', '.join(names) if names else '-',
-                ', '.join(categories) if categories else '-',
-                ', '.join(allergies) if allergies else '-',
-                rsvp_data['phone'],
-                rsvp_data.get('email', '-'),
-                rsvp_data.get('comments', '-'),
-                rsvp_data.get('song_request', '-'),
-                rsvp_data.get('id', '-')
-            ]
+            guests = rsvp_data.get('guests', [])
+            rows = []
             
-            # Append row
+            if guests:
+                for i, guest in enumerate(guests):
+                    row = [
+                        timestamp,
+                        family_id,
+                        attending,
+                        guest.get('name', '-'),
+                        guest.get('age_category', '-'),
+                        guest.get('allergies', '-') or '-',
+                        phone if i == 0 else '',
+                        email if i == 0 else '',
+                        comments if i == 0 else '',
+                        song_request if i == 0 else ''
+                    ]
+                    rows.append(row)
+            else:
+                # No guests (attending = no)
+                rows.append([
+                    timestamp,
+                    family_id,
+                    attending,
+                    '-',
+                    '-',
+                    '-',
+                    phone,
+                    email,
+                    comments,
+                    song_request
+                ])
+            
+            # Append all rows
             self.service.spreadsheets().values().append(
                 spreadsheetId=self.spreadsheet_id,
-                range='A:K',
+                range='A:J',
                 valueInputOption='RAW',
                 insertDataOption='INSERT_ROWS',
-                body={'values': [row]}
+                body={'values': rows}
             ).execute()
             
-            logger.info(f"RSVP added to Google Sheets: {rsvp_data['phone']}")
+            logger.info(f"RSVP added to Google Sheets: {len(rows)} rows for family {family_id}")
             return True
         except HttpError as e:
             logger.error(f"Error adding RSVP to Google Sheets: {e}")
