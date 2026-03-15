@@ -160,8 +160,8 @@ export const RSVPSectionNew = () => {
           <p className="text-gray-dark text-lg leading-relaxed max-w-2xl mx-auto">
             Para organizarlo bien (y cuidar cada detalle), ayúdanos confirmando si vienes y cuántos seréis. Si hay alergias o intolerancias, indícalo por favor para que todo el mundo disfrute sin preocupaciones.
           </p>
-          <p className="text-gray-darkest text-lg font-semibold mt-4">
-            Nos ayudaría mucho que nos confirmaras antes del 30 de mayo.
+          <p className="text-gray-darkest text-lg mt-4">
+            Nos ayudaría mucho que nos confirmaras <span className="underline">antes del 30 de mayo.</span>
           </p>
         </div>
 
