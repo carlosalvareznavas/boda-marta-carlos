@@ -64,7 +64,7 @@ export const HeroNew = () => {
         <div className="text-center mb-8 max-w-2xl">
           <p className="text-xl md:text-2xl text-gray-darkest font-light leading-relaxed">
             La vida, a nuestra manera.<br />
-            ¡Y que suerte celebrarla contigo!
+            ¡Y qué suerte celebrarla contigo!
           </p>
         </div>
 
